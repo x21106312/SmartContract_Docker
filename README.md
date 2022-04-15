@@ -48,6 +48,31 @@ It will then display a message similar to a node application linked to the Ether
 And perform the distribution of tokens to the ten different addresses
 
 Step4 : We can acquire the token distribution details from Etherscan, and ether will be taken from the owner's account following the transaction.
+Step5 :Application execution via Docker
+ install the latest Docker app 
+ In the project folder add new files
+ dockerignore with below content
+node_modules
+npm-debug.log
+b)	Dockerfile with below content
+FROM node:16
+# Create app directory
+WORKDIR /usr/src/app
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
+RUN npm install
+# If you are building your code for production
+# RUN npm ci --only=production
+# Bundle app source
+COPY . .
+EXPOSE 8080
+CMD [ "node", "distribute.js" ]
+Give the name of the node program that needs to be executed in the CMD tag.
+Command to tag image: docker build . -t maryneethu/node-web-app
+By clicking the Run button, we can trigger the node application and perform all the transactions from Docker.
+
 
 
 
